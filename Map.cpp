@@ -147,10 +147,6 @@ void Map::display_map() {
             tiles[i][j]->display_tile();
         }
     }
-
-    for (int i = 0; i < money.size(); i++) {
-        money[i].display();
-    }
 }
 
 void Map::place_character(int *x, int *y) {
@@ -230,7 +226,8 @@ void Map::add_money() {
             Tile *current = get_tile(j, i);
             if (current->get_type() == Tile::TileType::FLOOR) {
                 if (rand() % 100 >= 99) {
-                    this->money.push_back(Money(j, i));
+                    Item *item = new Money(j, i);
+                    current->add_item(item);
                     money_added++;
                     if (money_added == money_limit) {
                         return;

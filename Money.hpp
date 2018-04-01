@@ -1,7 +1,8 @@
 #ifndef MONEY_HPP_
 #define MONEY_HPP_
+#include "Item.hpp"
 
-class Money {
+class Money : public Item {
     public:
 
         enum Denomination {
@@ -32,7 +33,8 @@ class Money {
         void set_x(int pos_x);
         void set_y(int pos_y);
 
-        void display();
+        virtual std::string get_description() const override;
+        virtual void display() const override;
 
     private:
 

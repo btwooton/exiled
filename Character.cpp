@@ -1,5 +1,6 @@
 #include "Character.hpp"
 #include "Tile.hpp"
+#include "Item.hpp"
 #include <ncurses.h>
 
 Character::Character(Character::CharacterClass cclass, int pos_x, int pos_y) {

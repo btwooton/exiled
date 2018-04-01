@@ -41,7 +41,6 @@ class Map {
         Tile ***tiles;
         int width, height;
         std::vector<Room> rooms;
-        std::vector<Money> money;
 };
 
 #endif

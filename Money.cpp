@@ -1,6 +1,8 @@
 #include "Money.hpp"
 #include <ncurses.h>
 #include <cstdlib>
+#include <sstream>
+#include <string>
 
 const int Money::COPPER_VALUE = 1;
 const int Money::SILVER_VALUE = 5;
@@ -18,13 +20,13 @@ Money::Money(int pos_x, int pos_y) {
     
     switch(denomination) {
         case Denomination::COPPER:
-            this->num_coins = rand() % 50;
+            this->num_coins = rand() % 50 + 1;
             break;
         case Denomination::SILVER:
-            this->num_coins = rand() % 80;
+            this->num_coins = rand() % 80 + 1;
             break;
         case Denomination::GOLD:
-            this->num_coins = rand() % 10;
+            this->num_coins = rand() % 10 + 1;
             break;
     }
 
@@ -90,8 +92,26 @@ void Money::set_y(int pos_y) {
     this->pos_y = pos_y;
 }
 
-void Money::display() {
+void Money::display() const {
     attron(COLOR_PAIR(denomination));
     mvaddch(this->pos_y, this->pos_x, this->sprite);
     attroff(COLOR_PAIR(denomination));
+}
+
+std::string Money::get_description() const {
+    std::ostringstream result;
+    result << num_coins;
+    switch(denomination) {
+        case Money::Denomination::COPPER:
+            result << " copper coins";
+            break;
+        case Money::Denomination::SILVER:
+            result << " silver coins";
+            break;
+        case Money::Denomination::GOLD:
+            result << " gold coins";
+            break;
+    }
+    result << " of value " << this->get_value();
+    return result.str();
 }

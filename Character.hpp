@@ -2,6 +2,8 @@
 #define CHARACTER_HPP_
 #include "Map.hpp"
 
+class Item;
+
 class Character {
     public:
 
@@ -29,6 +31,7 @@ class Character {
         void move_west();
         void move_south();
         void move_north();
+        void inspect(Item *i);
 
         int pos_x, pos_y;
         char sprite;

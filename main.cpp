@@ -65,6 +65,12 @@ int main(int argc, char *argv[]) {
             m.display_map();
             c.display();
             c.display_stats(h);
+            Tile *current_tile = m.get_tile(c.get_x(), c.get_y());
+            if (current_tile->has_item()) {
+                Item *it = current_tile->get_item();
+                mvprintw(h - 4, 50, "You see: %s",
+                        it->get_description().c_str());
+            }
             refresh();
         }
     }
