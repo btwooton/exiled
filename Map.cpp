@@ -1,6 +1,7 @@
 #include "Map.hpp"
 #include "Tile.hpp"
 #include "Room.hpp"
+#include "Money.hpp"
 #include <cstdlib>
 #include <climits>
 
@@ -62,6 +63,7 @@ void Map::fill_map(int num_rooms) {
     this->connect_rooms();
     this->add_earth();
     this->add_stairs();
+    this->add_money();
 
 }
 
@@ -145,6 +147,10 @@ void Map::display_map() {
             tiles[i][j]->display_tile();
         }
     }
+
+    for (int i = 0; i < money.size(); i++) {
+        money[i].display();
+    }
 }
 
 void Map::place_character(int *x, int *y) {
@@ -214,6 +220,25 @@ void Map::add_stairs() {
 
     Tile *down_stair = this->get_tile(stair_x, stair_y);
     down_stair->set_type(Tile::TileType::DOWN_STAIRS);
+}
+
+void Map::add_money() {
+    int money_limit = 3;
+    int money_added = 0;
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            Tile *current = get_tile(j, i);
+            if (current->get_type() == Tile::TileType::FLOOR) {
+                if (rand() % 100 >= 99) {
+                    this->money.push_back(Money(j, i));
+                    money_added++;
+                    if (money_added == money_limit) {
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }
 
 

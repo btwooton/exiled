@@ -11,6 +11,8 @@ class Tile {
             UP_STAIRS
         };
 
+        static short TILE_COLOR_INDEX;
+
         Tile(TileType type, int pos_x, int pos_y);
         ~Tile() = default;
 

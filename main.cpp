@@ -4,6 +4,7 @@
 #include "Character.hpp"
 #include "Map.hpp"
 #include "Tile.hpp"
+#include "Money.hpp"
 
 int main(int argc, char *argv[]) {
     srand(time(NULL));
@@ -14,7 +15,17 @@ int main(int argc, char *argv[]) {
     bool playing = true;
 
     initscr();
-    
+
+    if (has_colors() == FALSE) {
+        endwin();
+        printf("Your terminal does not support color\n");
+        exit(1);
+    }
+    start_color();
+    init_pair(Money::Denomination::COPPER, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(Money::Denomination::SILVER, COLOR_CYAN, COLOR_WHITE);
+    init_pair(Money::Denomination::GOLD, COLOR_YELLOW, COLOR_WHITE);
+    init_pair(Tile::TILE_COLOR_INDEX, COLOR_WHITE, COLOR_BLACK);
     noecho();
     cbreak();
     curs_set(0);

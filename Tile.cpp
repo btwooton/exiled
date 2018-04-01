@@ -1,6 +1,8 @@
 #include "Tile.hpp"
 #include <ncurses.h>
 
+short Tile::TILE_COLOR_INDEX = 123;
+
 Tile::Tile(Tile::TileType type, int pos_x, int pos_y) {
     this->type = type;
     this->pos_x = pos_x;
@@ -42,7 +44,8 @@ void Tile::display_tile() {
             sprite = '<';
             break;
     }
-
+    attron(COLOR_PAIR(TILE_COLOR_INDEX));
     mvaddch(this->pos_y, this->pos_x, sprite);
+    attroff(COLOR_PAIR(TILE_COLOR_INDEX));
 
 }

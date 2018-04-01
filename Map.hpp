@@ -5,6 +5,7 @@
 
 class Tile;
 class Room;
+class Money;
 
 class Map {
     public:
@@ -35,10 +36,12 @@ class Map {
         int get_num_neighbors(Tile *tile);
         void add_earth();
         void add_stairs();
+        void add_money();
 
         Tile ***tiles;
         int width, height;
         std::vector<Room> rooms;
+        std::vector<Money> money;
 };
 
 #endif
