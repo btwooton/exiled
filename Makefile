@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++11
+CFLAGS = -std=c++11 -pedantic -Wall
 LFLAGS = -lncurses
 OBJS = main.out
 SRC = main.cpp
