@@ -12,7 +12,7 @@ Tile::Tile(Tile::TileType type, int pos_x, int pos_y) {
 
 Tile::~Tile() {
     if (has_item()) {
-        for (int i = 0; i < items.size(); i++) {
+        for (int i = 0; i < (int)items.size(); i++) {
             delete items[i];
         }
     }
@@ -58,7 +58,7 @@ void Tile::display_tile() const {
     attroff(COLOR_PAIR(TILE_COLOR_INDEX));
 
     if (has_item()) {
-        for (int i = 0; i < items.size(); i++) {
+        for (int i = 0; i < (int)items.size(); i++) {
             items[i]->display();
         }
     }

@@ -101,7 +101,7 @@ bool Map::fill_rect(int start_x, int start_y, int w, int h) {
 }
 
 void Map::connect_rooms() {
-    for (int i = 0; i < this->rooms.size() - 1; i++) {
+    for (int i = 0; i < (int)this->rooms.size() - 1; i++) {
         Room r1 = rooms[i];
         Room r2 = rooms[i + 1];
         int current_x = r1.get_x_center();
