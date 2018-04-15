@@ -21,7 +21,7 @@ class Money : public Item {
 
         Money(int pos_x, int pos_y);
         Money(Denomination denomination, int num_coins, int pos_x, int pos_y);
-        ~Money() = default;
+        ~Money();
 
         double get_weight() const;
         int get_value() const;

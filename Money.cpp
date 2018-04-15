@@ -33,6 +33,8 @@ Money::Money(int pos_x, int pos_y) {
     this->sprite = '$';
 }
 
+Money::~Money() {}
+
 Money::Money(Denomination denomination, int num_coins, int pos_x, int pos_y) {
     this->denomination = denomination;
     this->num_coins = num_coins;
