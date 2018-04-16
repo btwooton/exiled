@@ -104,7 +104,7 @@ char Character::get_sprite() {
     return sprite;
 }
 
-void Character::display() {
+void Character::render() const {
     mvaddch(this->pos_y, this->pos_x, this->sprite);
 }
 

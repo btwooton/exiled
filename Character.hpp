@@ -1,10 +1,11 @@
 #ifndef CHARACTER_HPP_
 #define CHARACTER_HPP_
 #include "Map.hpp"
+#include "IRenderable.hpp"
 
 class Item;
 
-class Character {
+class Character: public IRenderable {
     public:
 
         enum CharacterClass {
@@ -14,15 +15,13 @@ class Character {
         };
 
         Character(CharacterClass cclass, int pos_x, int pos_y);
-        ~Character() = default;
-
         int get_x();
         int get_y();
 
         void move(Map::Direction dir, const Map& map);
 
         char get_sprite();
-        void display();
+        virtual void render() const override;
         void display_stats(int screen_height);
     
     private:
