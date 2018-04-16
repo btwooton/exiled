@@ -1,7 +1,7 @@
 #include "Map.hpp"
 #include "Tile.hpp"
 #include "Room.hpp"
-#include "Money.hpp"
+#include "Item.hpp"
 #include <cstdlib>
 #include <climits>
 
@@ -141,7 +141,7 @@ void Map::connect_rooms() {
     }
 }
 
-void Map::display_map() {
+void Map::render() const {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
             tiles[i][j]->display_tile();
@@ -226,7 +226,7 @@ void Map::add_money() {
             Tile *current = get_tile(j, i);
             if (current->get_type() == Tile::TileType::FLOOR) {
                 if (rand() % 100 >= 99) {
-                    Item *item = new Money(j, i);
+                    Item item(Money(j, i));
                     current->add_item(item);
                     money_added++;
                     if (money_added == money_limit) {

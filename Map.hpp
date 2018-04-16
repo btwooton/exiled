@@ -2,12 +2,13 @@
 #define MAP_HPP_
 
 #include <vector>
+#include "IRenderable.hpp"
 
 class Tile;
 class Room;
 class Money;
 
-class Map {
+class Map : public IRenderable {
     public:
 
         enum Direction {
@@ -26,7 +27,7 @@ class Map {
 
         Tile *get_tile(int x, int y) const;
 
-        void display_map();
+        virtual void render() const override;
         void place_character(int *x, int *y);
 
     private:
