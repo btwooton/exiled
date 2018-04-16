@@ -1,12 +1,38 @@
 #ifndef ITEM_HPP_
 #define ITEM_HPP_
 #include <string>
+#include "Money.hpp"
+#include "IRenderable.hpp"
 
-class Item {
+class Money;
+
+class Item : public IRenderable {
     public:
-        virtual ~Item() = 0;
-        virtual std::string get_description() const = 0;
-        virtual void display() const = 0;
+        enum ItemType {
+            MONEY
+        };
+
+        union {
+            Money money;
+        };
+
+        Item(Money other);
+        Item(const Item& other);
+
+        ~Item();
+
+        template <typename T>
+        T& get();
+
+        ItemType get_type() const;
+        
+        virtual void render() const override;
+
+        std::string get_description() const;
+    private:
+        ItemType type;
 };
+
+template<> Money& Item::get<Money>();
 
 #endif
