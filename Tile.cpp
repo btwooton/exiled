@@ -11,11 +11,6 @@ Tile::Tile(Tile::TileType type, int pos_x, int pos_y) {
 }
 
 Tile::~Tile() {
-    if (has_item()) {
-        for (int i = 0; i < (int)items.size(); i++) {
-            delete items[i];
-        }
-    }
 }
 
 Tile::TileType Tile::get_type() const {
@@ -59,7 +54,7 @@ void Tile::display_tile() const {
 
     if (has_item()) {
         for (int i = 0; i < (int)items.size(); i++) {
-            items[i]->display();
+            items[i].render();
         }
     }
 
@@ -69,10 +64,10 @@ bool Tile::has_item() const {
     return items.size() > 0;
 }
 
-void Tile::add_item(Item *i) {
+void Tile::add_item(Item i) {
     this->items.push_back(i);
 }
 
-Item *Tile::get_item() const {
+Item Tile::get_item() const {
     return items[items.size() - 1];
 }

@@ -27,14 +27,14 @@ class Tile {
         void display_tile() const;
 
         bool has_item() const;
-        void add_item(Item *i);
-        Item *get_item() const;
+        void add_item(Item i);
+        Item get_item() const;
 
     private:
 
         int pos_x;
         int pos_y;
         TileType type;
-        std::vector<Item*> items;
+        std::vector<Item> items;
 };
 #endif
