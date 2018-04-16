@@ -1,10 +1,13 @@
 #include <ncurses.h>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 #include "Character.hpp"
 #include "Map.hpp"
 #include "Tile.hpp"
 #include "Money.hpp"
+#include "IRenderable.hpp"
+#include "Item.hpp"
 
 int main(int argc, char *argv[]) {
     srand(time(NULL));
@@ -13,6 +16,8 @@ int main(int argc, char *argv[]) {
 
     char input;
     bool playing = true;
+
+    std::vector<IRenderable*> renderables;
 
     initscr();
 
@@ -32,11 +37,14 @@ int main(int argc, char *argv[]) {
 
     getmaxyx(stdscr, h, w);
     Map m(w, h - 4);
+    renderables.push_back(&m);
     m.fill_map(10);
     m.place_character(&char_x, &char_y);
     Character c(Character::CharacterClass::FOOTMAN, char_x, char_y);
-    m.display_map();
-    c.display();
+    renderables.push_back(&c);
+    for (auto renderable : renderables) {
+        renderable->render();
+    }
     c.display_stats(h);
     
 
@@ -62,14 +70,15 @@ int main(int argc, char *argv[]) {
                     break;
             }
             clear();
-            m.display_map();
-            c.display();
+            for (auto renderable : renderables) {
+                renderable->render();
+            }
             c.display_stats(h);
             Tile *current_tile = m.get_tile(c.get_x(), c.get_y());
             if (current_tile->has_item()) {
-                Item *it = current_tile->get_item();
+                Item it = current_tile->get_item();
                 mvprintw(h - 4, 50, "You see: %s",
-                        it->get_description().c_str());
+                        it.get_description().c_str());
             }
             refresh();
         }
