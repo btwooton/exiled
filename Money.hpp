@@ -1,8 +1,9 @@
 #ifndef MONEY_HPP_
 #define MONEY_HPP_
-#include "Item.hpp"
 
-class Money : public Item {
+#include <string>
+
+class Money {
     public:
 
         enum Denomination {
@@ -21,6 +22,7 @@ class Money : public Item {
 
         Money(int pos_x, int pos_y);
         Money(Denomination denomination, int num_coins, int pos_x, int pos_y);
+        Money(const Money& other);
         ~Money();
 
         double get_weight() const;
@@ -33,15 +35,15 @@ class Money : public Item {
         void set_x(int pos_x);
         void set_y(int pos_y);
 
-        virtual std::string get_description() const override;
-        virtual void display() const override;
+        std::string get_description() const;
+        void display() const;
 
     private:
-
-        int num_coins;
+    
         Denomination denomination;
-        char sprite;
+        int num_coins;
         int pos_x, pos_y;
+        char sprite;
 
     
 };

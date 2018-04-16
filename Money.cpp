@@ -43,6 +43,14 @@ Money::Money(Denomination denomination, int num_coins, int pos_x, int pos_y) {
     this->sprite = '$';
 }
 
+Money::Money(const Money& other) : 
+    denomination(other.denomination),
+    num_coins(other.num_coins),
+    pos_x(other.pos_x),
+    pos_y(other.pos_y),
+    sprite(other.sprite) {}
+    
+    
 double Money::get_weight() const {
     double weight;
     switch(denomination) {
